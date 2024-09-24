@@ -5,7 +5,6 @@ ENDPOINT = (
     "https://www.topuniversities.com/rankings/endpoint?nid=3990755&items_per_page=15"
 )
 LIMIT = 500
-data = []
 
 
 def fetch_data(page):
@@ -15,8 +14,9 @@ def fetch_data(page):
     return response.json()
 
 
-def process_data(page=0):
-    global data, LIMIT
+def process_data(data=None, page=0):
+    if data is None:
+        data = []
 
     for node in fetch_data(page)["score_nodes"]:
         desired_cols = [
@@ -32,10 +32,11 @@ def process_data(page=0):
         data.append(base_data)
 
     if len(data) < LIMIT:
-        process_data(page + 1)
+        return process_data(data, page + 1)
+    return data
 
 
 if __name__ == "__main__":
-    process_data()
+    data = process_data()
     df = pd.DataFrame(data)
     df.to_csv("./data/university_rankings.csv", index=False)
