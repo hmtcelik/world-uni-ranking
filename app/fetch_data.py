@@ -6,7 +6,6 @@ ENDPOINT = (
 )
 LIMIT = 500
 data = []
-page = 0
 
 
 def fetch_data(page):
@@ -17,7 +16,7 @@ def fetch_data(page):
 
 
 def process_data(page=0):
-    global data
+    global data, LIMIT
 
     for node in fetch_data(page)["score_nodes"]:
         desired_cols = [
