@@ -1,7 +1,9 @@
+import pathlib
 import streamlit as st
 import pandas as pd
 
-df = pd.read_csv("./data/university_rankings.csv")
+current_dir = pathlib.Path(__file__).parent
+df = pd.read_csv(current_dir / "data" / "university_rankings.csv")
 
 st.title("Top 500 Universities")
 st.subheader("Explore the rankings of the world's top universities")

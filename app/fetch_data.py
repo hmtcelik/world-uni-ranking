@@ -1,5 +1,7 @@
+import pathlib
 import requests
 import pandas as pd
+import logging
 
 ENDPOINT = (
     "https://www.topuniversities.com/rankings/endpoint?nid=3990755&items_per_page=15"
@@ -7,7 +9,7 @@ ENDPOINT = (
 LIMIT = 500
 
 
-def fetch_data(page):
+def fetch_page(page):
     url = f"{ENDPOINT}&page={page}"
     response = requests.get(url)
     response.raise_for_status()
@@ -18,7 +20,7 @@ def process_data(data=None, page=0):
     if data is None:
         data = []
 
-    for node in fetch_data(page)["score_nodes"]:
+    for node in fetch_page(page)["score_nodes"]:
         desired_cols = [
             "rank_display",
             "rank",
@@ -36,7 +38,13 @@ def process_data(data=None, page=0):
     return data
 
 
+def save_data(file_name: str, data: list):
+    df = pd.DataFrame(data)
+    current_dir = pathlib.Path(__file__).parent
+    df.to_csv(current_dir / "data" / file_name, index=False)
+
+
 if __name__ == "__main__":
     data = process_data()
-    df = pd.DataFrame(data)
-    df.to_csv("./data/university_rankings.csv", index=False)
+    save_data("university_rankings.csv", data)
+    logging.info("Data fetched and saved successfully")
