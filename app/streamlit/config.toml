@@ -1,3 +1,0 @@
-# Allowed Message Origins
-# A list of allowed message origins for the Streamlit app.
-allowedMessageOrigins = ["http://world-uni-rankings.abdulhamitcelik.com"]
