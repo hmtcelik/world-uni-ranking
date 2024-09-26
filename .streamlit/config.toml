@@ -10,7 +10,7 @@ baseUrlPath = "/"
 # on and `server.enableCORS` is off at the same time, we will prioritize
 # `server.enableXsrfProtection`.
 # Default: true
-enableCORS = true
+enableCORS = false
 
 # Enables support for Cross-Site Request Forgery (XSRF) protection, for added
 # security.
@@ -18,16 +18,4 @@ enableCORS = true
 # on and `server.enableCORS` is off at the same time, we will prioritize
 # `server.enableXsrfProtection`.
 # Default: true
-enableXsrfProtection = true
-
-
-[browser]
-
-# Internet address where users should point their browsers in order to
-# connect to the app. Can be IP address or DNS name and path.
-# This is used to:
-# - Set the correct URL for CORS and XSRF protection purposes.
-# - Show the URL on the terminal
-# - Open the browser
-# Default: "localhost"
-serverAddress = "http://world-uni-rankings.abdulhamitcelik.com"
+enableXsrfProtection = false
