@@ -1,4 +1,3 @@
-app/streamlit/routes.py
 app/data/*
 !app/data/.keep
 
